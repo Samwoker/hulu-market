@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import AOSProvider from "./AOSProvider";
 
 
 const poppins = Poppins({
@@ -20,12 +21,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
+
   return (
     <html lang="en">
       <body
         className={`${poppins.variable} font-sans bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100` }
       >
-        {children}
+       <AOSProvider> {children}</AOSProvider>
       </body>
     </html>
   );

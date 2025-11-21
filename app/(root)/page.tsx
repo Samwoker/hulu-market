@@ -1,10 +1,11 @@
-import HeroSection from "@/components/HeroSection"
-
+import BentoGrid from "@/components/Bento"
+import Hero from "@/components/Hero"
 
 const page = () => {
   return (
     <div>
-      <HeroSection />
+      <Hero/>
+      <BentoGrid/>
     </div>
   )
 }

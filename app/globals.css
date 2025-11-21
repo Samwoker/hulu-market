@@ -111,6 +111,17 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
+@theme{
+   --theme-font: "Jost", sans-serif;
+  --primary-color: #006666;
+  --secondary-color: #FE6A49;
+  --success-color: #00AC46;
+  --info-color: #173878;
+  --warning-color: #FFAE1A;
+  --danger-color: #FE6A49;
+  --color-heading: #253D4E;
+  --color-text: #7E7E7E;
+}
 
 @layer base {
   * {
