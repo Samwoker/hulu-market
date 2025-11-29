@@ -7,11 +7,11 @@ export default function RootLayout({children}:Readonly<{children:React.ReactNode
 
     return(
         <div>
+            <main>
             <HeaderOffer />
             <Header/>
             <Separator />
             <NavBar/>
-            <main>
                 {children}
             </main>
         </div>

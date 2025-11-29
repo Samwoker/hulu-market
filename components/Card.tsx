@@ -5,14 +5,16 @@ import { Button } from "@/components/ui/button";
 interface CardProps {
   image: string;
   hoverImage: string;
+  onQuickViewClick: ()=>void;
 }
 
 export default function Card({
   image,
   hoverImage,
+  onQuickViewClick
 }: CardProps) {
   return (
-    <div className="relative group w-94 h-135 cursor-pointer overflow-hidden rounded-2xl shadow-lg">
+    <div className="relative group w-80 h-120 cursor-pointer overflow-hidden rounded-2xl shadow-lg">
 
       {/* Default image */}
       <div
@@ -40,7 +42,7 @@ export default function Card({
       {/* Bottom center buttons */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-3 group-hover:translate-y-0">
 
-        <Button variant="secondary" className="rounded-full px-4 py-4 shadow bg-[#006666] text-white hover:bg-[#FE6A49] hover:cursor-pointer ">
+        <Button variant="secondary" className="rounded-full px-4 py-4 shadow bg-[#006666] text-white hover:bg-[#FE6A49] hover:cursor-pointer " onClick={onQuickViewClick}>
           Quick View
         </Button>
 
