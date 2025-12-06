@@ -14,6 +14,7 @@ interface Color{
   hex:string;
 }
 
+
 type Product = {
     image: string;
     hoverImage: string;

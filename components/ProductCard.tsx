@@ -5,8 +5,18 @@ import { Separator } from "./ui/separator"
 import {  Eye, Grid,  Heart,  Rows4, Shuffle } from "lucide-react"
 import CardRow from "./CardRow"
 import { Button } from "./ui/button"
-import { useState } from "react"
+import { useState ,useEffect} from "react"
 import QuickView from "./QuickView"
+
+type FetchedProduct = {
+    _id: string;
+    images: string[];
+    title: string;
+    price: string;
+    discountPrice: string;
+    discountPercent: string;
+    description?: string;
+}
 
 type Product = {
     image: string;
@@ -26,9 +36,25 @@ type Product = {
 
 const ProductCart = () => {
       const [open , setOpen] = useState(false);
-      const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
+      const [quickViewProduct, setQuickViewProduct] = useState<FetchedProduct | null>(null);
       const [showGrid,setShowGrid] = useState(false)
-      const handleQuickView = (product: Product) => {
+
+      const [products,setProducts] = useState<FetchedProduct[]>([])
+      useEffect(()=>{
+        async function fetchProducts(){
+          const res = await fetch("/api/products",{
+            method:"GET",
+            headers:{"Content-Type":"application/json"},
+            credentials:"include", 
+          })
+          return res.json()
+        }
+       fetchProducts().then(setProducts).catch(err=>console.log(err));
+        
+      },[])
+
+
+      const handleQuickView = (product: FetchedProduct) => {
           setQuickViewProduct(product);
           setOpen(true);
       }
@@ -37,17 +63,17 @@ const ProductCart = () => {
     return(
         <div className="grid grid-cols-3 gap-6  mx-12" >
         {
-        trendingProducts.map((item, i) => {
+        products.map((item, i) => {
         // Apply onClick handler to a container or the Card component itself
           return (
             <div 
-            key={i} 
+            key={item._id} 
             className="mt-16 cursor-pointer" 
             //   onClick={() => handleQuickView(item)}
             >
               <Card 
-              image={item.image}
-              hoverImage={item.hoverImage}
+              image={item.images[0]}
+              hoverImage={item.images[1]}
 
               onQuickViewClick = {()=> handleQuickView(item)}
               />
@@ -212,11 +238,11 @@ const ProductCart = () => {
              
              </div>
         </div>
-         <QuickView 
+         {/* <QuickView 
               open={open} 
               setOpen={setOpen} 
               product={quickViewProduct} 
-            />
+            /> */}
     </div>
   )
 }
